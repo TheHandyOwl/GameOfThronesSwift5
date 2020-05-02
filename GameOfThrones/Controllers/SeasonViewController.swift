@@ -39,35 +39,38 @@ class SeasonViewController: UIViewController {
         setupUI()
     }
     
+    @objc func showEpisodes() {
+        let episodesDS = DataSources.episodeDataSource(model: model.sortedEpisodes())
+        let episodesVC = ArrayTableViewController(dataSource: episodesDS,
+                                                 delegate: EpisodesDelegate(),
+                                                 title: "Episodes",
+                                                 style: .plain)
+        
+        navigationController?.pushViewController(episodesVC,
+                                                 animated: true)
+    }
+    
     @objc func sayMyName() {
         let alert = UIAlertController(title: "Say my name:", message: model.name, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         self.present(alert, animated: true)
     }
     
-    @objc func sayMyInfo() {
-        let alert = UIAlertController(
-            title: "More info:",
-            message: model.episodes.reduce("", { $0 + $1.description + "\n" }),
-            preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-        self.present(alert, animated: true)
-    }
-    
     func setupToolbar() {
+        
+        let episodesButton = UIBarButtonItem(
+            title: "Episodes",
+            style: .plain,
+            target: self,
+            action: #selector(showEpisodes))
+        
         let seasonButton = UIBarButtonItem(
             title: "Name",
             style: .plain,
             target: self,
             action: #selector(sayMyName))
         
-        let episodesButton = UIBarButtonItem(
-            title: "Info",
-            style: .plain,
-            target: self,
-            action: #selector(sayMyInfo))
-        
-        navigationItem.rightBarButtonItems = [seasonButton, episodesButton]
+        navigationItem.rightBarButtonItems = [episodesButton, seasonButton]
     }
     
     func setupUI() {

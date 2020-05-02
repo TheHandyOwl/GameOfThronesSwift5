@@ -1,5 +1,5 @@
 //
-//  EpisodeViewController.swift
+//  PersonViewController.swift
 //  GameOfThrones
 //
 //  Created by Carlos on 02/05/2020.
@@ -8,18 +8,18 @@
 
 import UIKit
 
-class EpisodeViewController: UIViewController {
-
-    @IBOutlet weak var seasonNameView: UILabel!
-    @IBOutlet weak var seasonReleaseDate: UILabel!
-    @IBOutlet weak var seasonEpisodesDescription: UILabel!
+class PersonViewController: UIViewController {
     
-    let model : Episode
-    init(model: Episode) {
+    @IBOutlet weak var personNameView: UILabel!
+    @IBOutlet weak var personAliasView: UILabel!
+    @IBOutlet weak var personHouseView: UILabel!
+    
+    // Model
+    let model : Person
+    init(model: Person) {
         self.model = model
         super.init(nibName: nil, bundle: nil)
-        
-        title = model.description
+        self.title = model.name
     }
     
     required init?(coder: NSCoder) {
@@ -28,19 +28,20 @@ class EpisodeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        setupUI()
+        super.viewWillAppear(animated)
+        syncViewWithModel()
     }
     
-    func setupUI() {
-        seasonNameView.text = "Season: \(model.episodeFromSeason.name)"
-        seasonReleaseDate.text = "Episode: \(model.title)"
-        seasonEpisodesDescription.text = "Bradcast Date: \(model.broadcastDate.formatDate2StringYYYYMMdd())"
+    func syncViewWithModel() {
+        personNameView.text = "Name: " + model.name
+        personAliasView.text = "Alias: " + model.alias
+        personHouseView.text = "House: " + model.house.name
     }
-
-
+    
     /*
     // MARK: - Navigation
 

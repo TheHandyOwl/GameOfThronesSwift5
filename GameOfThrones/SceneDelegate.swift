@@ -29,24 +29,31 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let houses = Repository.local.houses
         let seasons = Repository.local.seasons
         
-        // Creamos controladores
+        // Controladores personalizados con vista
+        /*
         let housesTableVC = HousesTableViewController(model: houses)
         let seasonsTableVC = SeasonsTableViewController(model: seasons)
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [housesTableVC, seasonsTableVC]
-        tabBarController.title = "Game Of Thrones"
-
-        // Controllers con genéricos
-        //let tableVC = HousesTableViewController(model: houses).wrappedInNavigation()
-        /*
-        let dataSource = DataSources.houseDateSource(model: houses)
-        let housesVC = ArrayTableViewController(
-            dataSource: dataSource,
-            delegate: HousesDelegate(),
-            title: "Game Of Thrones",
-            style: .plain).wrappedInNavigation()
-        */
+         */
         
+        // Controllers con genéricos sin vista asociada
+        //let tableVC = HousesTableViewController(model: houses).wrappedInNavigation()
+        let housesDataSource = DataSources.houseDataSource(model: houses)
+        let housesVC = ArrayTableViewController(
+            dataSource: housesDataSource,
+            delegate: HousesDelegate(),
+            title: "Houses",
+            style: .plain)
+        let seasonsDataSource = DataSources.seasonDataSource(model: seasons)
+        let seasonsVC = ArrayTableViewController(
+            dataSource: seasonsDataSource,
+            delegate: SeasonsDelegate(),
+            title: "Seasons",
+            style: .plain)
+        let tabBarController = UITabBarController()
+        tabBarController.viewControllers = [housesVC, seasonsVC]
+
         // RootVC
         let rootVC = tabBarController.wrappedInNavigationWithFormat()
         //let rootVC = housesVC

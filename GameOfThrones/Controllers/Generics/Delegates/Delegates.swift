@@ -23,3 +23,36 @@ final class HousesDelegate : BaseViewControllerDelegate <House>, UITableViewDele
     }
         
 }
+
+final class PersonsDelegate : BaseViewControllerDelegate <Person>, UITableViewDelegate {
+    
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let person = source?.element(atIndexPath: indexPath), let nav = viewController?.navigationController {
+            let VC = PersonViewController(model: person)
+            nav.pushViewController(VC, animated: true)
+        }
+    }
+        
+}
+
+final class SeasonsDelegate : BaseViewControllerDelegate <Season>, UITableViewDelegate {
+    
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let season = source?.element(atIndexPath: indexPath), let nav = viewController?.navigationController {
+            let VC = SeasonViewController(model: season)
+            nav.pushViewController(VC, animated: true)
+        }
+    }
+        
+}
+
+final class EpisodesDelegate : BaseViewControllerDelegate <Episode>, UITableViewDelegate {
+    
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let episode = source?.element(atIndexPath: indexPath), let nav = viewController?.navigationController {
+            let VC = EpisodeViewController(model: episode)
+            nav.pushViewController(VC, animated: true)
+        }
+    }
+        
+}

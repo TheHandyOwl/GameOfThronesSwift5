@@ -127,8 +127,8 @@ class RepositoryTests: XCTestCase {
         XCTAssertNotNil(seasons)
     }
     
-    func testLocalRepositorySeasonsCreationWhen2() {
-        XCTAssertEqual(seasons.count, 2)
+    func testLocalRepositorySeasonsCreationWhen7() {
+        XCTAssertEqual(seasons.count, 7)
     }
     
     func testFindSeasonNamed() {
@@ -153,19 +153,19 @@ class RepositoryTests: XCTestCase {
         XCTAssertEqual(localData.seasons(filteredByName: "Season 1")?.count, 1)
     }
     
-    func testFilterSeasonsByEpisodesMoreThanOrEqualTo() {
-        XCTAssertEqual(localData.seasons(filteredByEpisodesMoreThanOrEqualTo: 0)?.count, 2)
+    func testFilterSeasonsByEpisodesMoreThanOrEqualToWhen7() {
+        XCTAssertEqual(localData.seasons(filteredByEpisodesMoreThanOrEqualTo: 0)?.count, 7)
         XCTAssertEqual(localData.seasons(filteredByEpisodesMoreThanOrEqualTo: 15)?.count, 0)
     }
     
-    func testFilterSeasonsByClosureWhen2() {
+    func testFilterSeasonsByClosureWhen7() {
         var seasonsFiltered : [Season]
         
         seasonsFiltered = localData.seasons(filteredByFunction: { $0.name == "Season 1" })
         XCTAssertEqual(seasonsFiltered.count, 1)
         
         seasonsFiltered = localData.seasons(filteredByFunction: { $0.count >= 0 })
-        XCTAssertEqual(seasonsFiltered.count, 2)
+        XCTAssertEqual(seasonsFiltered.count, 7)
         XCTAssertNotEqual(seasonsFiltered.count, 0)
         
         seasonsFiltered = localData.seasons(filteredByFunction: { $0.count <= 0 })
@@ -177,7 +177,7 @@ class RepositoryTests: XCTestCase {
         XCTAssertNotEqual(seasonsFiltered.count, 2)
         
         seasonsFiltered = localData.seasons(filteredByFunction: { $0.count <= 15 })
-        XCTAssertEqual(seasonsFiltered.count, 2)
+        XCTAssertEqual(seasonsFiltered.count, 7)
         XCTAssertNotEqual(seasonsFiltered.count, 0)
     }
     

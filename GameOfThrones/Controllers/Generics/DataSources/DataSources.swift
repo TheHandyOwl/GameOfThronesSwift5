@@ -10,7 +10,7 @@ import UIKit
 
 final class DataSources {
     
-    static func houseDateSource(model: [House]) -> ArrayDataSource <House> {
+    static func houseDataSource(model: [House]) -> ArrayDataSource <House> {
         return ArrayDataSource(model: model) { (house: House, tableView: UITableView) -> UITableViewCell in
             
             let cellID = "House"
@@ -28,7 +28,7 @@ final class DataSources {
         }
     }
     
-    static func personDateSource(model: [Person]) -> ArrayDataSource <Person> {
+    static func personDataSource(model: [Person]) -> ArrayDataSource <Person> {
         return ArrayDataSource(model: model) { (person: Person, tableView: UITableView) -> UITableViewCell in
             
             let cellID = "Person"
@@ -40,6 +40,41 @@ final class DataSources {
             
             cell?.textLabel?.text = person.fullName
             cell?.detailTextLabel?.text = person.alias
+            
+            return cell!
+        }
+    }
+    
+    static func seasonDataSource(model: [Season]) -> ArrayDataSource <Season> {
+        return ArrayDataSource(model: model) { (season: Season, tableView: UITableView) -> UITableViewCell in
+            
+            let cellID = "Season"
+            var cell = tableView.dequeueReusableCell(withIdentifier: cellID)
+            
+            if cell == nil {
+                cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellID)
+            }
+            
+            cell?.textLabel?.text = season.description
+            cell?.imageView?.image = season.numberInImage
+            cell?.detailTextLabel?.text = "\(season.count) episodes"
+            
+            return cell!
+        }
+    }
+    
+    static func episodeDataSource(model: [Episode]) -> ArrayDataSource <Episode> {
+        return ArrayDataSource(model: model) { (episode: Episode, tableView: UITableView) -> UITableViewCell in
+            
+            let cellID = "Episode"
+            var cell = tableView.dequeueReusableCell(withIdentifier: cellID)
+            
+            if cell == nil {
+                cell = UITableViewCell(style: .default, reuseIdentifier: cellID)
+            }
+            
+            cell?.textLabel?.text = episode.title
+            cell?.detailTextLabel?.text = episode.description
             
             return cell!
         }
