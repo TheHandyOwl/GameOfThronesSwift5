@@ -12,4 +12,6 @@ Application to practice with custom TableViewController, also to practice with a
 Initially, it starts with a custom TVC, which is changed to a generic one to reuse the same TVC in all similar controllers.
 
 
+![Video example](https://github.com/TheHandyOwl/GameOfThronesSwift5/blob/master/GameOfThronesApp.gif "Video example")
+
   [repo]: https://github.com/TheHandyOwl/GameOfThronesSwift5
